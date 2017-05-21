@@ -32,7 +32,6 @@
     "chunk-manifest-webpack-plugin": "^1.0.0",
     "css-loader": "^0.26.1",
     "external-svg-sprite-loader": "^1.0.3",
-    "extract-text-webpack-plugin": "^1.0.1",
     "identity-obj-proxy": "^3.0.0",
     "jsdom": "^9.10.0",
     "react-addons-test-utils": "^15.4.1",
@@ -63,7 +62,8 @@
     "webpack-dev-middleware": "^1.8.4",
     "webpack-dev-server": "^2.3.0",
     "webpack-hot-middleware": "^2.13.2",
-    "webpack-validator": "^2.3.0"
+    "webpack-validator": "^2.3.0",
+    "extract-text-webpack-plugin": "^1.0.1"
   },
   "keywords": [
     "C"
