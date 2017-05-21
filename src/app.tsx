@@ -29,7 +29,7 @@ class App extends React.Component<{}, IAppState> {
                 <div className="row">
                     <div className="col col-md-8 col-sm-8">
                         <p><i className="fa fa-lg fa-map-marker text-primary" /> {meeting.place}</p>
-                        <p><i className="fa fa-lg fa-clock-o text-danger" /> {dateStr} </p>
+                        <p><i className="fa fa-lg fa-clock-o text-primary" /> {dateStr} </p>
                     </div>
                     <div className="col col-md-4 col-sm-4">
                         <MemberSumary summary={meeting.summary} />

@@ -31,7 +31,7 @@ function buildConfig(options) {
         output: {
             path: isDev ? Path.join(__dirname, '../build') : Path.join(__dirname, '../build'),
             filename: isDev ? '[name].js' : '[name].js',
-            publicPath: isDev ? '/react-views/build' : '/react-views/build',
+            publicPath: isDev ? `${ProjectDir}/build` : `${ProjectDir}/build`,
             libraryTarget: 'var',
             library: PackageJson.name,
         },

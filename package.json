@@ -5,7 +5,9 @@
   "main": "./server/server.js",
   "scripts": {
     "serverbuild": "cd server/src && tsc",
-    "start": "node ./server/server"
+    "build": "node ./.startup/build",
+    "start-dev": "node ./server/server --env dev",
+    "start": "node ./server/server --env prod"
   },
   "author": "^C",
   "license": "ISC",
