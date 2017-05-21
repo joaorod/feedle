@@ -46,13 +46,7 @@
     "tslint": "^5.2.0",
     "tslint-react": "^3.0.0",
     "typescript": "^2.3.2",
-    "typings": "^1.4.0",
-    "webpack": "^1.13.3",
-    "webpack-assets-manifest": "^0.6.1",
-    "webpack-dev-middleware": "^1.8.4",
-    "webpack-dev-server": "^2.3.0",
-    "webpack-hot-middleware": "^2.13.2",
-    "webpack-validator": "^2.3.0"
+    "typings": "^1.4.0"
   },
   "dependencies": {
     "axios": "^0.15.3",
@@ -63,7 +57,13 @@
     "yargs": "^6.5.0",
     "express": "^4.14.0",
     "path": "^0.12.7",
-    "planify": "^1.5.0"
+    "planify": "^1.5.0",
+    "webpack": "^1.13.3",
+    "webpack-assets-manifest": "^0.6.1",
+    "webpack-dev-middleware": "^1.8.4",
+    "webpack-dev-server": "^2.3.0",
+    "webpack-hot-middleware": "^2.13.2",
+    "webpack-validator": "^2.3.0"
   },
   "keywords": [
     "C"
