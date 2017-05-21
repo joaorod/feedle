@@ -1,0 +1,18 @@
+{
+    "_comment01" : "https://github.com/Microsoft/TypeScriptSamples/blob/master/react-flux-babel-karma/tsconfig.json",
+    "compilerOptions": {
+        "allowSyntheticDefaultImports": true,
+        "jsx": "preserve",
+        "module": "es6",
+        "target": "ES2015",
+        "noImplicitAny": false,
+        "removeComments": false,
+        "sourceMap": true,
+        "moduleResolution": "node",
+        "allowJs": true,
+        "outDir": "./RND_NAME_PREVENT_TS5055_Cannot_write_file_X_because_would_overwrite_input_file"
+    },
+    "exclude": [
+        "node_modules"
+    ]
+}

@@ -1,0 +1,32 @@
+{
+    "editor.formatOnType": true,
+    "editor.detectIndentation": false,
+    "files.associations": {
+        "**/src/**/*.js": "javascript",
+        "**/src/**/*.snap": "json",
+        "**/node_modules/**/*.js": "javascript",
+        ".babelrc": "json",
+        ".eslintignore": "gitignore"
+    },
+    "vsicons.presets.angular": false,
+    // The following will hide the js and map files in the editor
+    "files.exclude": {
+        "node_modules/": true
+    },
+    "search.exclude": {
+        "build/**": true,
+        "coverage/**": true
+    },
+    "eslint.enable": false,
+    "eslint.autoFixOnSave": true,
+    "eslint.options": {
+        "configFile": ".eslintrc.json"
+    },
+    "tslint.enable": false,
+    "tslint.configFile": "tslint.json",
+    "tslint.autoFixOnSave": true,
+    "tslint.exclude": "**/model.*",
+    "stylelint.enable": false,
+    "css.validate": false,
+    "scss.validate": false
+}

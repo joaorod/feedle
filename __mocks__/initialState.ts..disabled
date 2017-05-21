@@ -1,0 +1,67 @@
+export const initialState: Model.OrderList = {
+        orders: [{
+            orderDate: '23/06/2013',
+            orderNumber: '32568347',
+            status: 0,
+            numberOfItems: 14,
+        },
+        {
+            orderDate: '24/06/2013',
+            orderNumber: 't87t78t',
+            status: 2,
+            numberOfItems: 8,
+        },
+        {
+            orderDate: '24/06/2011',
+            orderNumber: 'com1ple2ted3',
+            status: 1,
+            numberOfItems: 3,
+        }],
+
+        texts: {
+            order: {
+                numberOfItems: 'Number of Items',
+                orderDate: 'Order Date',
+                orderDetails: 'Order Details',
+                orderNumber: 'Order Number',
+                shipping: 'Shipping',
+                status: 'Status',
+                total: 'Total',
+                totalValue: 'Value',
+                orderStatus:
+                ['_Order in progress'
+                    , '_Order delivered'
+                    , '_Order cancelled'
+                    , '_Order closed',
+                ],
+                youCurrentlyHaveNoOrders: '_You currently have no orders or returns',
+                // tslint:disable-next-line:max-line-length
+                youCurrentlyHaveNoOrdersDetailMessage: '_You will find here all the information related to your orders and returns. If you have any question you can contact our customer service team.',
+                startShopping: '_Start shopping',
+            },
+            merchantOrder: {
+                shippingFrom: 'Shipping from',
+                farfetchId: 'Farfetch ID',
+                quantity: 'Quantity',
+                size: 'Size',
+                orderStatus:
+                ['_Placed'
+                    , '_In progress'
+                    , '_Shipped'
+                    , '_Delivered'
+                    , '_Ready to collect'
+                    , '_Order cancelled'
+                    , '_Order closed'
+                    , '_Collected'],
+                itemCancelled: '_Item Cancelled',
+                noStock: '_No Stock',
+                returnProducts: '_Return products',
+                // tslint:disable-next-line:max-line-length
+                returnProducts14DaysWarning: '_Your returned item must arrive at the Farfetch partner boutique or brand no later than 14 days after your delivery date. We recommend that you book your return pick-up within 7 days of your delivery date.',
+            },
+            loading: 'Loading...',
+            dutiesAndTaxes: [null, '_VAT Included', '_Duties Included', '_Duties and Taxes Included'],
+        },
+    };
+
+export default initialState;

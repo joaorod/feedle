@@ -1,0 +1,25 @@
+import axios from 'axios';
+import MockAdapter from 'axios-mock-adapter';
+import * as stub from './stubs';
+import Config from '../../src/config';
+
+const mock = new MockAdapter(axios, { delayResponse: 2000 });
+
+export default function mockAxios() {
+    const HTTP_STATUS_OK = 200;
+    const HTTP_STATUS_SERVER_ERROR = 500;
+    const emptyHeaders = {};
+
+    stub.orderDetails
+        .forEach((orderDetails) =>
+            mock.onGet(Config.getOrderDetailsRoute(orderDetails.orderNumber))
+                .reply(() => {
+                    return [HTTP_STATUS_OK, orderDetails, emptyHeaders];
+                }),
+        );
+
+    mock.onGet(Config.getOrderDetailsRoute('500500500'))
+        .reply(() => {
+            return [HTTP_STATUS_SERVER_ERROR, 'some error', emptyHeaders];
+        });
+}
