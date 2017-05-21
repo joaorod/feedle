@@ -55,15 +55,15 @@
     "webpack-dev-middleware": "^1.8.4",
     "webpack-dev-server": "^2.3.0",
     "webpack-hot-middleware": "^2.13.2",
-    "webpack-validator": "^2.3.0",
-    "yargs": "^6.5.0"
+    "webpack-validator": "^2.3.0"
   },
   "dependencies": {
     "axios": "^0.15.3",
     "body-parser": "^1.17.2",
     "classnames": "^2.2.5",
     "react": "^15.4.1",
-    "react-dom": "^15.4.1"
+    "react-dom": "^15.4.1",
+    "yargs": "^6.5.0"
   },
   "keywords": [
     "C"
