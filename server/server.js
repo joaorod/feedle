@@ -117,7 +117,7 @@ function runServer() {
         var webApi = require('./bin/webapi.js');
         webApi.WebAPI.register(app);
         
-        var server_port = process.env.OPENSHIFT_NODEJS_PORT || argv.port;
+        var server_port = process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || argv.port;
         var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || argv.hostname;
 
         app.listen(server_port, server_ip_address, (err) => {

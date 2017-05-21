@@ -31,7 +31,7 @@ function buildConfig(options) {
         output: {
             path: isDev ? Path.join(__dirname, '../build') : Path.join(__dirname, '../build'),
             filename: isDev ? '[name].js' : '[name].js',
-            publicPath: isDev ? `${ProjectDir}/build` : `${ProjectDir}/build`,
+            publicPath: isDev ? `/build` : `/build`,
             libraryTarget: 'var',
             library: PackageJson.name,
         },
