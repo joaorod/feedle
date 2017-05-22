@@ -9,13 +9,7 @@ export class Repository {
         place: "Farfetch - Lionesa - Stairs",
         startDate: new Date(2017, 5, 26, 16, 30, 0, 0),
         endDate: new Date(2017, 5, 26, 17, 30, 0, 0),
-        members: [{
-            id:1,
-            name: "João Rodrigues",
-            email: "joao.rodrigues@farfetch.com",
-            cluster: "Checkout",
-            confirmed: Model.Confirmation.Yes
-        }],
+        members: [],
         summary: {
             totalConfirmed: 0,
             totalMembers: 0,
