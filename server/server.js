@@ -104,7 +104,7 @@ function runServer() {
     // Public files are served as usually
     app.use('/', express.static('./'));
 
-    var server_port = process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || argv.port || 8080;
+    var server_port = process.env.PORT || 8080;//process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || argv.port || 8080;
     var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || argv.hostname;
     
     // Start server
@@ -121,12 +121,10 @@ function runServer() {
         webApi.WebAPI.register(app);
         
         
-        app.listen(process.env.PORT || 8080, server_ip_address, (err) => {
+        app.listen(server_port, server_ip_address, (err) => {
             if (err) {
                 reject(err);
             } else {
-                var port = app.address().port;
-                console.log("App now running on port", port);
                 process.stdout.write('\nServer is now up and running, press CTRL-C to stop.\n');
                 argv.env === 'dev' && process.stdout.write('Triggering first build, hang on...\n\n');
             }
