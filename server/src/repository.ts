@@ -1,6 +1,8 @@
-import * as fs from "fs";
+import * as mongoose from "mongoose";
+require( './db' );
+
 export class Repository {
-    private static dataFile: string = 'meeting.json';
+    
     private static initialState: Model.Meeting =
     {
         name: "TypeScript - JavaScript that Scales!",
@@ -61,23 +63,27 @@ export class Repository {
 
     private static readData(): Promise<Model.Meeting> {
         return new Promise((res, rej) => {
-            fs.readFile(Repository.dataFile, 'utf8', (err, data) => {
-                if (err)
-                    if (err.code === "ENOENT") { //File Not found
-                        res(Repository.initialState);
-                    }
-                    else {
-                        rej(err);
+            mongoose.model('Meeting').find((dberr, dbres) =>
+            {
+                if (dberr) { 
+                   rej(dberr);
+                }
+                else {
+                    var rv = Repository.initialState;
+                    if (dbres.length > 0)
+                    {
+                        rv = (dbres[0] as any).data;
                     }    
-                else
-                    res(JSON.parse(data));
-            });
+                    res(rv);
+                }        
+            })    
         });
     }
 
     private static saveData(data: Model.Meeting): Promise<{}> {
         return new Promise((res, rej) => {
-            fs.writeFile(Repository.dataFile, JSON.stringify(data), { encoding: 'utf8' }, (err) => {
+            mongoose.model('Meeting')
+                .update({ id: 1 }, { id: 1, data },{upsert: true, setDefaultsOnInsert: true}, (err) => {
                 if (err)
                     rej(err);
                 else

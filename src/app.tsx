@@ -238,6 +238,23 @@ class MemberForm extends React.Component<IMemberFormProps, { editingMember: Mode
         return rv;
     }
 }
+interface IResultsProps
+{
+    results: Model.Member[],
 
+    
+}    
+class Results extends React.Component<IResultsProps, {}>
+{
+    public render()
+    {
+        return (
+            <div>
+                <h5>Results</h5>
+                
+            </div>  
+        );
+    }
+}    
 
 export default App;

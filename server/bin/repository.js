@@ -8,7 +8,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const fs = require("fs");
+const mongoose = require("mongoose");
+require('./db');
 class Repository {
     getMeeting() {
         return __awaiter(this, void 0, void 0, function* () {
@@ -57,22 +58,24 @@ class Repository {
     }
     static readData() {
         return new Promise((res, rej) => {
-            fs.readFile(Repository.dataFile, 'utf8', (err, data) => {
-                if (err)
-                    if (err.code === "ENOENT") {
-                        res(Repository.initialState);
+            mongoose.model('Meeting').find((dberr, dbres) => {
+                if (dberr) {
+                    rej(dberr);
+                }
+                else {
+                    var rv = Repository.initialState;
+                    if (dbres.length > 0) {
+                        rv = dbres[0].data;
                     }
-                    else {
-                        rej(err);
-                    }
-                else
-                    res(JSON.parse(data));
+                    res(rv);
+                }
             });
         });
     }
     static saveData(data) {
         return new Promise((res, rej) => {
-            fs.writeFile(Repository.dataFile, JSON.stringify(data), { encoding: 'utf8' }, (err) => {
+            mongoose.model('Meeting')
+                .update({ id: 1 }, { id: 1, data }, { upsert: true, setDefaultsOnInsert: true }, (err) => {
                 if (err)
                     rej(err);
                 else
@@ -81,7 +84,6 @@ class Repository {
         });
     }
 }
-Repository.dataFile = 'meeting.json';
 Repository.initialState = {
     name: "TypeScript - JavaScript that Scales!",
     place: "Farfetch - Lionesa",
