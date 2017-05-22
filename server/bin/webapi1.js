@@ -9,14 +9,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const repository_1 = require("./repository");
-const config_1 = require("../shared/config");
 const repository = new repository_1.Repository();
 class WebAPI {
     static register(app) {
-        app.get(config_1.Config.apiBaseUrl, WebAPI.getMeeting);
-        app.post(config_1.Config.apiBaseUrl, WebAPI.addMember);
-        app.put(config_1.Config.apiBaseUrl + ':id', WebAPI.updateMember);
-        app.delete(config_1.Config.apiBaseUrl + ':id', WebAPI.deleteMember);
+        const apiBaseUrl = "/api/meeting";
+        app.get(apiBaseUrl, WebAPI.getMeeting);
+        app.post(apiBaseUrl, WebAPI.addMember);
+        app.put(apiBaseUrl, WebAPI.updateMember);
+        app.delete(apiBaseUrl + ':id', WebAPI.deleteMember);
     }
     static getMeeting(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -74,4 +74,4 @@ class WebAPI {
 }
 exports.WebAPI = WebAPI;
 exports.default = WebAPI;
-//# sourceMappingURL=webApi.js.map
+//# sourceMappingURL=webapi.js.map
