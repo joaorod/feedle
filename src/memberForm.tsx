@@ -101,7 +101,7 @@ class MemberForm extends React.Component<IMemberFormProps, { editingMember: Mode
                                         onClick={() => { this.props.addOrUpdateMember(this.state.editingMember); }}>
                                         <i className="fa fa-paper-plane" aria-hidden="true"></i> Submit</button>
 
-                                    <button type="button" className="btn btn-default" style={{marginLeft:"20"}}
+                                    <button type="button" className="btn btn-default" style={{marginLeft:"20px"}}
                                         onClick={() => { this.resetForm(); }}>
                                         <i className="fa fa-undo" aria-hidden="true"></i> Clear</button>
                                 </div>
@@ -119,7 +119,7 @@ class MemberForm extends React.Component<IMemberFormProps, { editingMember: Mode
             id: 0,
             name: '',
             email: '',
-            confirmed: Model.Confirmation.NotSure,
+            confirmed: Model.Confirmation.Yes,
             cluster:''
         };
         return rv;

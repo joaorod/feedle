@@ -22,30 +22,28 @@ class MagicTs extends React.Component<{ meeting: Model.Meeting }, IMagicTsState>
         var items = this.state.winners.map(p => (<MagicTsWinner key={p.id} winner={p} />))
         var winners = (items.length !== 0) &&
             (<div>
-                <h4>Winners!</h4>
+                <h4>Winners</h4>
                 <div className="list-group">
                     {items}
                 </div>
             </div>
             );
         var buttonContent = (!this.state.maybeWinner)
-            ? (<span> <i className="fa fa-magic fa-lg"></i> TypeScript is Magic!</span>)
+            ? (<span> <i className="fa fa-magic fa-lg"></i> do you feel lucky ?</span>)
             : (<span> <i className="fa fa-circle-o-notch fa-spin  fa-fw"></i> {this.state.maybeWinner.name}</span>);
 
         return (
-            <div>
-                <button className="btn btn-lg btn-info center-block" onClick={() => { this.DoMagic() }}>
+            <div className="panel">
+            <div className="panel-body">
+                <button className="btn btn-lg btn-primary center-block" onClick={() => { this.DoMagic() }}>
                     {buttonContent}
                 </button>
 
-                <div className="row">
-                    <div className="col col-md-8">
-                        <div className="list-group">
-                            {winners}
-                        </div>
-                    </div>
+                <div className="center-block">
+                    {winners}
                 </div>
             </div>
+            </div>    
         );
     }
     private DoMagic() {
@@ -56,7 +54,7 @@ class MagicTs extends React.Component<{ meeting: Model.Meeting }, IMagicTsState>
             var allWinners = this.state.winners;
             var maybeWinner = this.findWinner();
             if (!!maybeWinner) {
-                if (i < 120) {
+                if (i < 50) {
                     this.FindWinner(i + 1);
                 }
                 else {
@@ -68,7 +66,7 @@ class MagicTs extends React.Component<{ meeting: Model.Meeting }, IMagicTsState>
             else {
                 alert('No more candidates!');
             }
-        }, (i + 1));
+        }, (i + 1)+50);
     }
 
     private findWinner() {
@@ -96,14 +94,11 @@ class MagicTsWinner extends React.Component<{ winner: Winner }, any>
     public render() {
         const winner = this.props.winner;
         return (
-            <a href="#" className="list-group-item list-group-item-action list-group-item-success" >
-                <div style={{ whiteSpace: "nowrap", overflow: "hidden" }}>
-                    <h4>
-                        <span> <i className="fa fa-2x fa-trophy text-danger" /> {winner.name}</span>
-                    </h4>
-                </div>
-            </a >
-
+            <div className="alert alert-info" role="alert">
+                <h4>
+                    <span> <i className="fa fa-2x fa-trophy text-primary" /> {winner.name}</span>
+                </h4>
+            </div>
         );
     }
 }

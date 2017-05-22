@@ -5,7 +5,7 @@ import { Config } from "./config";
 import MemberSummary from './memberSummary';
 import MemberList from './memberList';
 import MemberForm from './memberForm';
-
+import TsSeparator from './tsSeparator';
 const apiBaseUrl = "/api/meeting";
 
 //import MagicTs from './magicTs';
@@ -30,32 +30,30 @@ class App extends React.Component<{}, IAppState> {
         var meeting = this.state.meeting;
         var dateStr = this.dateToString(meeting.startDate) + "-" + this.dateToString(meeting.endDate);
         return (
-            <div className="container">
-                
+            <div>
+                <h1>Event registration</h1>
                 <div className="row">
-                    <div className="col col-md-8 col-sm-8">
-                        <h3>{meeting.name}</h3>
+                    <div className="col col-md-6 col-sm-6">
+                        <h4>{meeting.name}</h4>
                         <p><i className="fa fa-lg fa-map-marker text-primary" /> {meeting.place}</p>
                         <p><i className="fa fa-lg fa-clock-o text-primary" /> {dateStr} </p>
                     </div>
-                    <div className="col col-md-4 col-sm-4">
+                    <div className="col col-md-6 col-sm-6">
                         <MemberSummary summary={meeting.summary} />
                     </div>
-                    
-                    <a className="btn btn-lg" href="#register_now">Register Now!</a>
-                    
                 </div>
                 <div className="row">
-                     <div className="col col-md-8 col-sm-8">
+                     <div className="col col-md-6 col-sm-6">
                         <MemberList members={meeting.members} editMember={this.editMember.bind(this)} />
                      </div>
-                        <div className="col col-md-4 col-sm-4">                    
+                        <div className="col col-md-6 col-sm-6">                    
                         <MemberForm addOrUpdateMember={this.addOrUpdateMember.bind(this)} member={this.state.editingMember} />
                     </div>    
                 </div>
-                <div className="row">
-                    {/*<MagicTs meeting = {meeting} />*/}
-                </div>
+                <TsSeparator />
+
+                {/*<MagicTs meeting={meeting} />*/}
+                
             </div>
         );
     }

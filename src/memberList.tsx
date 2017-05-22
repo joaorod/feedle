@@ -23,19 +23,21 @@ class MemberItem extends React.Component<{ member: Model.Member, editMember: (m:
             (member.confirmed === Model.Confirmation.Yes
                 ? "list-group-item-success"
                 : member.confirmed === Model.Confirmation.No
-                    ? "list-group-item-warning" : "")
+                    ? "list-group-item-danger" : "")
         
-        const className2 = "pull-right fa fa-lg " +
+        const className2 = "pull-right glyphicon " +
             (member.confirmed === Model.Confirmation.Yes
-                ? "fa-check text-success"
+                ? "glyphicon-ok text-success"
                 : member.confirmed === Model.Confirmation.No
-                    ? "fa-times text-danger" : "fa-question")
+                    ? "glyphicon glyphicon-remove text-danger" : "glyphicon-adjust")
         return (
             <div  className={className} >
                 <div style={{ whiteSpace: "nowrap", overflow: "hidden" }}>
-                    <a href="#register_now" className="btn btn-default btn-xs fa fa-pencil" data-toggle="tooltip" title="Edit!"
+                    
+                    
+                    <span> <i className="fa fa-lg fa-user-circle-o" /> {member.name}</span>
+                    <a href="#register_now" className="btn btn-default btn-sm fa fa-pencil pull-right" data-toggle="tooltip" title="Edit!"
                         onClick={() => { this.props.editMember(member); }} />
-                    <span> <i className="fa fa-lg fa-user-circle-o text-primary" /> {member.name}</span>
                     <i className={className2}  />
                 </div>
             </div >

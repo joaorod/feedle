@@ -5,11 +5,17 @@ export class Repository {
     
     private static initialState: Model.Meeting =
     {
-        name: "TypeScript - JavaScript that Scales!",
+        name: "TypeScript - JavaScript that scales!",
         place: "Farfetch - Lionesa - Stairs",
         startDate: new Date(2017, 5, 26, 16, 30, 0, 0),
         endDate: new Date(2017, 5, 26, 17, 30, 0, 0),
-        members: [],
+        members: [{
+            id:1,
+            name: "João Rodrigues",
+            email: "joao.rodrigues@farfetch.com",
+            cluster: "Checkout",
+            confirmed: Model.Confirmation.Yes
+        }],
         summary: {
             totalConfirmed: 0,
             totalMembers: 0,
