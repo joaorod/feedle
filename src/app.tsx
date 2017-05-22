@@ -52,7 +52,7 @@ class App extends React.Component<{}, IAppState> {
                 </div>
                 <TsSeparator />
 
-                {/*<MagicTs meeting={meeting} />*/}
+                {/* <MagicTs meeting={meeting} /> */}
                 
             </div>
         );

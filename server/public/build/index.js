@@ -66,7 +66,7 @@ var feedle =
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "66ec3c1ead0898edf97e"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "6aa20bb7b0abb13095a0"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -23589,6 +23589,13 @@ var feedle =
 	            var className2 = "pull-right glyphicon " + (member.confirmed === 1 /* Yes */
 	            ? "glyphicon-ok text-success" : member.confirmed === 2 /* No */
 	            ? "glyphicon glyphicon-remove text-danger" : "glyphicon-adjust");
+	            var cluster = member.cluster && React.createElement(
+	                "small",
+	                { className: "text-primary" },
+	                " (",
+	                member.cluster,
+	                ")"
+	            );
 	            return React.createElement(
 	                "div",
 	                { className: className },
@@ -23601,7 +23608,9 @@ var feedle =
 	                        " ",
 	                        React.createElement("i", { className: "fa fa-lg fa-user-circle-o" }),
 	                        " ",
-	                        member.name
+	                        member.name,
+	                        " ",
+	                        cluster
 	                    ),
 	                    React.createElement("a", { href: "#register_now", className: "btn btn-default btn-sm fa fa-pencil pull-right", "data-toggle": "tooltip", title: "Edit!", onClick: function onClick() {
 	                            _this4.props.editMember(member);

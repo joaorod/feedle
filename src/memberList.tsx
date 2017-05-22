@@ -30,12 +30,15 @@ class MemberItem extends React.Component<{ member: Model.Member, editMember: (m:
                 ? "glyphicon-ok text-success"
                 : member.confirmed === Model.Confirmation.No
                     ? "glyphicon glyphicon-remove text-danger" : "glyphicon-adjust")
+        const cluster = member.cluster && (
+            <small className="text-primary"> ({member.cluster})</small>
+        );
         return (
             <div  className={className} >
                 <div style={{ whiteSpace: "nowrap", overflow: "hidden" }}>
                     
                     
-                    <span> <i className="fa fa-lg fa-user-circle-o" /> {member.name}</span>
+                    <span> <i className="fa fa-lg fa-user-circle-o" /> {member.name} {cluster}</span>
                     <a href="#register_now" className="btn btn-default btn-sm fa fa-pencil pull-right" data-toggle="tooltip" title="Edit!"
                         onClick={() => { this.props.editMember(member); }} />
                     <i className={className2}  />
