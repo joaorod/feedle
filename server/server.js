@@ -121,7 +121,7 @@ function runServer() {
         webApi.WebAPI.register(app);
         
         
-        app.listen(server_port, server_ip_address, (err) => {
+        app.listen(server_port, (err) => {
             if (err) {
                 reject(err);
             } else {
