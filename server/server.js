@@ -125,6 +125,8 @@ function runServer() {
             if (err) {
                 reject(err);
             } else {
+                var port = app.address().port;
+                console.log("App now running on port", port);
                 process.stdout.write('\nServer is now up and running, press CTRL-C to stop.\n');
                 argv.env === 'dev' && process.stdout.write('Triggering first build, hang on...\n\n');
             }
