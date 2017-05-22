@@ -8,7 +8,7 @@ import MemberForm from './memberForm';
 
 const apiBaseUrl = "/api/meeting";
 
-import MagicTs from './magicTs';
+//import MagicTs from './magicTs';
 
 interface IAppState {
     meeting: Model.Meeting,
@@ -41,6 +41,9 @@ class App extends React.Component<{}, IAppState> {
                     <div className="col col-md-4 col-sm-4">
                         <MemberSummary summary={meeting.summary} />
                     </div>
+                    
+                    <a className="btn btn-lg" href="#register_now">Register Now!</a>
+                    
                 </div>
                 <div className="row">
                      <div className="col col-md-8 col-sm-8">

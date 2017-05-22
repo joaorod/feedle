@@ -51,7 +51,7 @@ if (argv.help) {
 
 function cleanBuild() {
     process.stdout.write('Cleaning previous build..\n');
-    rimraf.sync(`${projectDir}/build`);
+    rimraf.sync(`${projectDir}/server/public/build`);
 }
 
 

@@ -12,6 +12,7 @@ declare module Model {
         id: number;
         name: string;
         email: string;
+        cluster: string;
         confirmed: Model.Confirmation;
     }
     interface Meeting {

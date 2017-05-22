@@ -6,7 +6,7 @@ export class Repository {
     private static initialState: Model.Meeting =
     {
         name: "TypeScript - JavaScript that Scales!",
-        place: "Farfetch - Lionesa",
+        place: "Farfetch - Lionesa - Stairs",
         startDate: new Date(2017, 5, 26, 16, 30, 0, 0),
         endDate: new Date(2017, 5, 26, 17, 30, 0, 0),
         members: [],
@@ -22,6 +22,7 @@ export class Repository {
     }
 
     public async addMember(member: Model.Member) {
+        if (!this.isValidMember(member)) throw "invalid member";
         const meeting = await Repository.readData();
         member.id = Repository.newId(meeting.members);
         meeting.members.push(member);
@@ -31,6 +32,7 @@ export class Repository {
     }
 
     public async updateMember(member: Model.Member) {
+        if (!this.isValidMember(member)) throw "invalid member";
         const meeting = await Repository.readData();
         meeting.members = meeting.members.map(m => m.id == member.id ? member : m);
         meeting.summary = this.computeSummary(meeting.members);
@@ -43,7 +45,10 @@ export class Repository {
         meeting.summary = this.computeSummary(meeting.members);
         await Repository.saveData(meeting);
     }  
-    
+    private isValidMember(member: Model.Member)
+    {
+        return (!!member) && (!!member.name);
+    }
     private static newId(members: Model.Member[])
     {
 

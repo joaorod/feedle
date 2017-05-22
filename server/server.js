@@ -102,7 +102,7 @@ function runServer() {
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({extended: true}));
     // Public files are served as usually
-    app.use('/', express.static('./'));
+    app.use('/', express.static('server/public'));
 
     var server_port = process.env.PORT || 8080;//process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || argv.port || 8080;
     var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || argv.hostname;

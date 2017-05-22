@@ -18,6 +18,8 @@ class Repository {
     }
     addMember(member) {
         return __awaiter(this, void 0, void 0, function* () {
+            if (!this.isValidMember(member))
+                throw "invalid member";
             const meeting = yield Repository.readData();
             member.id = Repository.newId(meeting.members);
             meeting.members.push(member);
@@ -28,6 +30,8 @@ class Repository {
     }
     updateMember(member) {
         return __awaiter(this, void 0, void 0, function* () {
+            if (!this.isValidMember(member))
+                throw "invalid member";
             const meeting = yield Repository.readData();
             meeting.members = meeting.members.map(m => m.id == member.id ? member : m);
             meeting.summary = this.computeSummary(meeting.members);
@@ -41,6 +45,9 @@ class Repository {
             meeting.summary = this.computeSummary(meeting.members);
             yield Repository.saveData(meeting);
         });
+    }
+    isValidMember(member) {
+        return (!!member) && (!!member.name);
     }
     static newId(members) {
         let id = members.map(p => p.id)
@@ -86,7 +93,7 @@ class Repository {
 }
 Repository.initialState = {
     name: "TypeScript - JavaScript that Scales!",
-    place: "Farfetch - Lionesa",
+    place: "Farfetch - Lionesa - Stairs",
     startDate: new Date(2017, 5, 26, 16, 30, 0, 0),
     endDate: new Date(2017, 5, 26, 17, 30, 0, 0),
     members: [],
