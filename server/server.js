@@ -104,10 +104,13 @@ function runServer() {
     // Public files are served as usually
     app.use('/', express.static('./'));
 
+    var server_port = process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || argv.port || 8080;
+    var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || argv.hostname;
+    
     // Start server
     return new Promise((resolve, reject) => {
         process.stdout.write(`Environment:            ${argv.env}\n`);
-        process.stdout.write(`Server address:         http://${argv.hostname}:${argv.port}\n`);
+        process.stdout.write(`Server address:         http://${server_ip_address}:${server_port}\n`);
 
         if (argv.env === 'dev') {
             process.stdout.write('Hot module replacement: on\n');
@@ -117,9 +120,7 @@ function runServer() {
         var webApi = require('./bin/webapi.js');
         webApi.WebAPI.register(app);
         
-        var server_port = process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || argv.port;
-        var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || argv.hostname;
-
+        
         app.listen(server_port, server_ip_address, (err) => {
             if (err) {
                 reject(err);
