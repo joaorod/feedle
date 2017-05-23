@@ -101,14 +101,22 @@ class App extends React.Component<{}, IAppState> {
                     ...this.state
                 };
                 newState.meeting = res.data as Model.Meeting;
-                newState.meeting.startDate = new Date(newState.meeting.startDate);
-                newState.meeting.endDate = new Date(newState.meeting.endDate);
+                newState.meeting.startDate = this.JSonStrToDate(newState.meeting.startDate);
+                newState.meeting.endDate = this.JSonStrToDate(newState.meeting.endDate);
+
                 newState.editingMember = null
                 this.setState(newState);
             })
             .catch((err) => {
                 alert(err);
             });
+    }
+
+    private JSonStrToDate(jsonDate: any)
+    {
+        var x = new Date(jsonDate);
+        x.setHours(x.getHours() - x.getTimezoneOffset() / 60);
+        return x;
     }
 
     private dateToString(dt: Date) {

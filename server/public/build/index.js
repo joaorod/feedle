@@ -66,7 +66,7 @@ var feedle =
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "ac094c08dd08d5308fc4"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "31897af37cd1e09df272"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -23279,13 +23279,20 @@ var feedle =
 	            return _axios2.default.get(apiBaseUrl).then(function (res) {
 	                var newState = Object.assign({}, _this3.state);
 	                newState.meeting = res.data;
-	                newState.meeting.startDate = new Date(newState.meeting.startDate);
-	                newState.meeting.endDate = new Date(newState.meeting.endDate);
+	                newState.meeting.startDate = _this3.JSonStrToDate(newState.meeting.startDate);
+	                newState.meeting.endDate = _this3.JSonStrToDate(newState.meeting.endDate);
 	                newState.editingMember = null;
 	                _this3.setState(newState);
 	            }).catch(function (err) {
 	                alert(err);
 	            });
+	        }
+	    }, {
+	        key: 'JSonStrToDate',
+	        value: function JSonStrToDate(jsonDate) {
+	            var x = new Date(jsonDate);
+	            x.setHours(x.getHours() - x.getTimezoneOffset() / 60);
+	            return x;
 	        }
 	    }, {
 	        key: 'dateToString',

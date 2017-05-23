@@ -11,9 +11,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose = require("mongoose");
 require('./db');
 class Repository {
-    static dateToGMT(date) {
-        return new Date(date.valueOf() + date.getTimezoneOffset() * 60000);
-    }
     getMeeting() {
         return __awaiter(this, void 0, void 0, function* () {
             var rv = Repository.meetingBase;
@@ -81,8 +78,8 @@ class Repository {
 Repository.meetingBase = {
     name: "TypeScript - JavaScript that scales!",
     place: "Farfetch - Lionesa - Stairs",
-    startDate: Repository.dateToGMT(new Date(2017, 5, 26, 16, 30, 0, 0)),
-    endDate: Repository.dateToGMT(new Date(2017, 5, 26, 17, 30, 0, 0)),
+    startDate: new Date(2017, 5, 26, 16, 30, 0, 0),
+    endDate: new Date(2017, 5, 26, 17, 30, 0, 0),
     members: [],
     summary: {
         totalConfirmed: 0,
