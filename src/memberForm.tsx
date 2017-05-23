@@ -116,7 +116,7 @@ class MemberForm extends React.Component<IMemberFormProps, { editingMember: Mode
 
     private memberDefault(): Model.Member {
         var rv = {
-            id: 0,
+            id: null,
             name: '',
             email: '',
             confirmed: Model.Confirmation.Yes,

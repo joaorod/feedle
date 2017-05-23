@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 class Winner {
-    constructor(public id: number, public name: string) {
+    constructor(public id: string, public name: string) {
     }
 }
 

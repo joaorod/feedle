@@ -16,14 +16,12 @@ class WebAPI {
         app.get(apiBaseUrl, WebAPI.getMeeting);
         app.post(apiBaseUrl, WebAPI.addMember);
         app.put(apiBaseUrl, WebAPI.updateMember);
-        app.delete(apiBaseUrl + ':id', WebAPI.deleteMember);
     }
     static getMeeting(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             console.log("Retrieving meeting");
             try {
                 let result = yield repository.getMeeting();
-                debugger;
                 res.json(result);
             }
             catch (error) {
@@ -34,7 +32,7 @@ class WebAPI {
     }
     static addMember(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log("Retrieving meeting");
+            console.log("Adding member:" + JSON.stringify(req.body));
             try {
                 let result = yield repository.addMember(req.body);
                 res.json(result);
@@ -47,22 +45,9 @@ class WebAPI {
     }
     static updateMember(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log("Retrieving meeting");
+            console.log("Updating member:" + JSON.stringify(req.body));
             try {
                 let result = yield repository.updateMember(req.body);
-                res.json(result);
-            }
-            catch (error) {
-                console.log(error);
-                res.sendStatus(500);
-            }
-        });
-    }
-    static deleteMember(req, res) {
-        return __awaiter(this, void 0, void 0, function* () {
-            console.log("Retrieving meeting");
-            try {
-                let result = yield repository.deleteMember(req.params.id);
                 res.json(result);
             }
             catch (error) {

@@ -9,7 +9,7 @@ declare module Model {
 
 declare module Model {
     interface Member {
-        id: number;
+        id: string;
         name: string;
         email: string;
         cluster: string;

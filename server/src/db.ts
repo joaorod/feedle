@@ -32,8 +32,11 @@ process.on('SIGINT', function() {
 
 
 // BRING IN YOUR SCHEMAS & MODELS
-var meetingSchema = new mongoose.Schema({
-  id: Number,
-  data: Object //HAMMER TIME - this should not be the entire meeting object!
+var memberSchema = new mongoose.Schema({
+    id: String,
+    name: String,
+    email: String,
+    cluster: String,
+    confirmed: Number
 });
-mongoose.model('Meeting', meetingSchema);
+mongoose.model('Member', memberSchema);

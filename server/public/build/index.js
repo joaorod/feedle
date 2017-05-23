@@ -66,7 +66,7 @@ var feedle =
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "6aa20bb7b0abb13095a0"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "77c2de5966c350f6eaab"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -23487,7 +23487,7 @@ var feedle =
 	        key: "memberDefault",
 	        value: function memberDefault() {
 	            var rv = {
-	                id: 0,
+	                id: null,
 	                name: '',
 	                email: '',
 	                confirmed: 1 /* Yes */

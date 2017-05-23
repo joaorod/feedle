@@ -2,8 +2,9 @@ import * as mongoose from "mongoose";
 require( './db' );
 
 export class Repository {
-    
-    private static initialState: Model.Meeting =
+
+    //This is static so it will not be stored
+    private static meetingBase: Model.Meeting =
     {
         name: "TypeScript - JavaScript that scales!",
         place: "Farfetch - Lionesa - Stairs",
@@ -18,46 +19,29 @@ export class Repository {
     };
     
     public async getMeeting() {
-        return await Repository.readData();
+        var rv = Repository.meetingBase;
+        rv.members = await Repository.readMembers();     
+        rv.summary = Repository.computeSummary(rv.members);
+        return rv;
     }
 
     public async addMember(member: Model.Member) {
         if (!this.isValidMember(member)) throw "invalid member";
-        const meeting = await Repository.readData();
-        member.id = Repository.newId(meeting.members);
-        meeting.members.push(member);
-        meeting.summary = this.computeSummary(meeting.members);
-        await Repository.saveData(meeting);
-        return member.id;
+        var id = await Repository.saveMember(member);
+        return id;
     }
 
     public async updateMember(member: Model.Member) {
-        if (!this.isValidMember(member)) throw "invalid member";
-        const meeting = await Repository.readData();
-        meeting.members = meeting.members.map(m => m.id == member.id ? member : m);
-        meeting.summary = this.computeSummary(meeting.members);
-        await Repository.saveData(meeting);
+        if (!this.isValidMember(member)) throw "invalid member";        
+        await Repository.saveMember(member);
     }
-
-    public async deleteMember(id: number) {
-        const meeting = await Repository.readData();
-        meeting.members = meeting.members.filter(m => m.id !== id);
-        meeting.summary = this.computeSummary(meeting.members);
-        await Repository.saveData(meeting);
-    }  
+   
     private isValidMember(member: Model.Member)
     {
         return (!!member) && (!!member.name);
     }
-    private static newId(members: Model.Member[])
-    {
-
-        let id = members.map(p => p.id)
-            .reduce((a, b) => Math.max(a, b), 0);
-        console.log(id);
-        return (id || 0) + 1;
-    }
-    private computeSummary(members: Model.Member[]) : Model.MeetingSummary {
+   
+    private static computeSummary(members: Model.Member[]) : Model.MeetingSummary {
         return {
             totalMembers: members.length,
             totalConfirmed: members.filter(p => p.confirmed === Model.Confirmation.Yes).length,
@@ -66,33 +50,36 @@ export class Repository {
         };
     }
 
-    private static readData(): Promise<Model.Meeting> {
+    private static readMembers(): Promise<Model.Member[]> {
         return new Promise((res, rej) => {
-            mongoose.model('Meeting').find((dberr, dbres) =>
+            mongoose.model('Member')
+                .find((dberr, dbres) =>
             {
                 if (dberr) { 
                    rej(dberr);
                 }
                 else {
-                    var rv = Repository.initialState;
-                    if (dbres.length > 0)
-                    {
-                        rv = (dbres[0] as any).data;
-                    }    
-                    res(rv);
+                    const members = dbres.map(p=>(p as any)) as Model.Member[];
+                    res(members);
                 }        
             })    
         });
     }
 
-    private static saveData(data: Model.Meeting): Promise<{}> {
+    private static saveMember(member: Model.Member): Promise<{}> {
+        if (!member.id)
+        {
+            member.id = new mongoose.mongo.ObjectID().toHexString();
+        }    
         return new Promise((res, rej) => {
-            mongoose.model('Meeting')
-                .update({ id: 1 }, { id: 1, data },{upsert: true, setDefaultsOnInsert: true}, (err) => {
+            mongoose.model('Member')
+                .update({ id: member.id  },  member ,{upsert: true, setDefaultsOnInsert: true}, (err,doc) => {
                 if (err)
                     rej(err);
                 else
-                    res();
+                {
+                    res(member.id)
+                }
             });
         });
     }

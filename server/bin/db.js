@@ -16,9 +16,12 @@ process.on('SIGINT', function () {
         process.exit(0);
     });
 });
-var meetingSchema = new mongoose.Schema({
-    id: Number,
-    data: Object
+var memberSchema = new mongoose.Schema({
+    id: String,
+    name: String,
+    email: String,
+    cluster: String,
+    confirmed: Number
 });
-mongoose.model('Meeting', meetingSchema);
+mongoose.model('Member', memberSchema);
 //# sourceMappingURL=db.js.map

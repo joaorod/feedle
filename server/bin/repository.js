@@ -13,49 +13,31 @@ require('./db');
 class Repository {
     getMeeting() {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield Repository.readData();
+            var rv = Repository.meetingBase;
+            rv.members = yield Repository.readMembers();
+            rv.summary = Repository.computeSummary(rv.members);
+            return rv;
         });
     }
     addMember(member) {
         return __awaiter(this, void 0, void 0, function* () {
             if (!this.isValidMember(member))
                 throw "invalid member";
-            const meeting = yield Repository.readData();
-            member.id = Repository.newId(meeting.members);
-            meeting.members.push(member);
-            meeting.summary = this.computeSummary(meeting.members);
-            yield Repository.saveData(meeting);
-            return member.id;
+            var id = yield Repository.saveMember(member);
+            return id;
         });
     }
     updateMember(member) {
         return __awaiter(this, void 0, void 0, function* () {
             if (!this.isValidMember(member))
                 throw "invalid member";
-            const meeting = yield Repository.readData();
-            meeting.members = meeting.members.map(m => m.id == member.id ? member : m);
-            meeting.summary = this.computeSummary(meeting.members);
-            yield Repository.saveData(meeting);
-        });
-    }
-    deleteMember(id) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const meeting = yield Repository.readData();
-            meeting.members = meeting.members.filter(m => m.id !== id);
-            meeting.summary = this.computeSummary(meeting.members);
-            yield Repository.saveData(meeting);
+            yield Repository.saveMember(member);
         });
     }
     isValidMember(member) {
         return (!!member) && (!!member.name);
     }
-    static newId(members) {
-        let id = members.map(p => p.id)
-            .reduce((a, b) => Math.max(a, b), 0);
-        console.log(id);
-        return (id || 0) + 1;
-    }
-    computeSummary(members) {
+    static computeSummary(members) {
         return {
             totalMembers: members.length,
             totalConfirmed: members.filter(p => p.confirmed === 1).length,
@@ -63,36 +45,38 @@ class Repository {
                 || p.confirmed === 3).length,
         };
     }
-    static readData() {
+    static readMembers() {
         return new Promise((res, rej) => {
-            mongoose.model('Meeting').find((dberr, dbres) => {
+            mongoose.model('Member')
+                .find((dberr, dbres) => {
                 if (dberr) {
                     rej(dberr);
                 }
                 else {
-                    var rv = Repository.initialState;
-                    if (dbres.length > 0) {
-                        rv = dbres[0].data;
-                    }
-                    res(rv);
+                    const members = dbres.map(p => p);
+                    res(members);
                 }
             });
         });
     }
-    static saveData(data) {
+    static saveMember(member) {
+        if (!member.id) {
+            member.id = new mongoose.mongo.ObjectID().toHexString();
+        }
         return new Promise((res, rej) => {
-            mongoose.model('Meeting')
-                .update({ id: 1 }, { id: 1, data }, { upsert: true, setDefaultsOnInsert: true }, (err) => {
+            mongoose.model('Member')
+                .update({ id: member.id }, member, { upsert: true, setDefaultsOnInsert: true }, (err, doc) => {
                 if (err)
                     rej(err);
-                else
-                    res();
+                else {
+                    res(member.id);
+                }
             });
         });
     }
 }
-Repository.initialState = {
-    name: "TypeScript - JavaScript that Scales!",
+Repository.meetingBase = {
+    name: "TypeScript - JavaScript that scales!",
     place: "Farfetch - Lionesa - Stairs",
     startDate: new Date(2017, 5, 26, 16, 30, 0, 0),
     endDate: new Date(2017, 5, 26, 17, 30, 0, 0),
