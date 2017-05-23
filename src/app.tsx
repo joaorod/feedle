@@ -8,6 +8,7 @@ import MemberForm from './memberForm';
 import TsSeparator from './tsSeparator';
 const apiBaseUrl = "/api/meeting";
 
+/*import MagicTs from './magicTs';*/
 
 interface IAppState {
     meeting: Model.Meeting,
@@ -27,7 +28,7 @@ class App extends React.Component<{}, IAppState> {
 
     public render() {
         var meeting = this.state.meeting;
-        var dateStr = this.dateToString(meeting.startDate) + "-" + this.dateToString(meeting.endDate);
+        var dateStr = this.dateToString(meeting.startDate) + "-" + this.dateToString(meeting.endDate) + " GMT";
         return (
             <div>
                 <h1>Event registration</h1>
@@ -51,7 +52,7 @@ class App extends React.Component<{}, IAppState> {
                 </div>
                 <TsSeparator />
 
-                
+                {/*<MagicTs meeting={meeting} />*/}
                 
             </div>
         );

@@ -29,7 +29,7 @@ class MemberItem extends React.Component<{ member: Model.Member, editMember: (m:
             (member.confirmed === Model.Confirmation.Yes
                 ? "glyphicon-ok text-success"
                 : member.confirmed === Model.Confirmation.No
-                    ? "glyphicon glyphicon-remove text-danger" : "glyphicon-adjust")
+                    ? "glyphicon-remove text-danger" : "glyphicon-adjust")
         const cluster = member.cluster && (
             <small className="text-primary"> ({member.cluster})</small>
         );

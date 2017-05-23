@@ -8,8 +8,8 @@ export class Repository {
     {
         name: "TypeScript - JavaScript that scales!",
         place: "Farfetch - Lionesa - Stairs",
-        startDate: new Date(2017, 5, 26, 16, 30, 0, 0),
-        endDate: new Date(2017, 5, 26, 17, 30, 0, 0),
+        startDate: Repository.dateToGMT(new Date(2017, 5, 26, 16, 30, 0, 0)),
+        endDate: Repository.dateToGMT(new Date(2017, 5, 26, 17, 30, 0, 0)),
         members: [],
         summary: {
             totalConfirmed: 0,
@@ -18,6 +18,11 @@ export class Repository {
         }
     };
     
+    public static dateToGMT(date:Date)
+    {
+        return new Date(date.valueOf() + date.getTimezoneOffset() * 60000);
+    }
+
     public async getMeeting() {
         var rv = Repository.meetingBase;
         rv.members = await Repository.readMembers();     

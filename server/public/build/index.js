@@ -66,7 +66,7 @@ var feedle =
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "77c2de5966c350f6eaab"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "ac094c08dd08d5308fc4"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -23175,7 +23175,7 @@ var feedle =
 	        key: 'render',
 	        value: function render() {
 	            var meeting = this.state.meeting;
-	            var dateStr = this.dateToString(meeting.startDate) + "-" + this.dateToString(meeting.endDate);
+	            var dateStr = this.dateToString(meeting.startDate) + "-" + this.dateToString(meeting.endDate) + " GMT";
 	            return React.createElement(
 	                'div',
 	                null,
@@ -23588,7 +23588,7 @@ var feedle =
 	            ? "list-group-item-danger" : "");
 	            var className2 = "pull-right glyphicon " + (member.confirmed === 1 /* Yes */
 	            ? "glyphicon-ok text-success" : member.confirmed === 2 /* No */
-	            ? "glyphicon glyphicon-remove text-danger" : "glyphicon-adjust");
+	            ? "glyphicon-remove text-danger" : "glyphicon-adjust");
 	            var cluster = member.cluster && React.createElement(
 	                "small",
 	                { className: "text-primary" },
@@ -23670,35 +23670,39 @@ var feedle =
 	            var summary = this.props.summary;
 	            return React.createElement(
 	                "div",
-	                { className: "alert alert-info" },
+	                { className: "panel" },
 	                React.createElement(
-	                    "p",
-	                    null,
-	                    "Registered : ",
+	                    "div",
+	                    { className: "panel-body" },
 	                    React.createElement(
-	                        "strong",
-	                        { className: "pull-right" },
-	                        summary.totalMembers
-	                    )
-	                ),
-	                React.createElement(
-	                    "p",
-	                    null,
-	                    "Confirmed : ",
+	                        "p",
+	                        { style: { marginBottom: "5px" } },
+	                        "Registered : ",
+	                        React.createElement(
+	                            "strong",
+	                            { className: "pull-right" },
+	                            summary.totalMembers
+	                        )
+	                    ),
 	                    React.createElement(
-	                        "strong",
-	                        { className: "pull-right" },
-	                        summary.totalConfirmed
-	                    )
-	                ),
-	                React.createElement(
-	                    "p",
-	                    null,
-	                    "Declined : ",
+	                        "p",
+	                        { style: { marginBottom: "5px" } },
+	                        "Confirmed : ",
+	                        React.createElement(
+	                            "strong",
+	                            { className: "pull-right" },
+	                            summary.totalConfirmed
+	                        )
+	                    ),
 	                    React.createElement(
-	                        "strong",
-	                        { className: "pull-right" },
-	                        summary.totalRefused
+	                        "p",
+	                        { style: { marginBottom: "5px" } },
+	                        "Declined : ",
+	                        React.createElement(
+	                            "strong",
+	                            { className: "pull-right" },
+	                            summary.totalRefused
+	                        )
 	                    )
 	                )
 	            );
