@@ -28,7 +28,10 @@ class App extends React.Component<{}, IAppState> {
 
     public render() {
         var meeting = this.state.meeting;
-        var dateStr = this.dateToString(meeting.startDate) + "-" + this.dateToString(meeting.endDate) + " GMT";
+        //FIX this Wrong time Zone!: var dateStr = this.dateToString(meeting.startDate) + "-" + this.dateToString(meeting.endDate) + " GMT";
+        //HACK -ignore server data!!
+        var dateStr = "Friday, 26th May 2017 16:30-17:30"
+
         return (
             <div>
                 <h1>Event registration</h1>
@@ -101,8 +104,8 @@ class App extends React.Component<{}, IAppState> {
                     ...this.state
                 };
                 newState.meeting = res.data as Model.Meeting;
-                newState.meeting.startDate = this.JSonStrToDate(newState.meeting.startDate);
-                newState.meeting.endDate = this.JSonStrToDate(newState.meeting.endDate);
+                newState.meeting.startDate = new Date(newState.meeting.startDate);
+                newState.meeting.endDate = new Date(newState.meeting.endDate);
 
                 newState.editingMember = null
                 this.setState(newState);
@@ -110,13 +113,6 @@ class App extends React.Component<{}, IAppState> {
             .catch((err) => {
                 alert(err);
             });
-    }
-
-    private JSonStrToDate(jsonDate: any)
-    {
-        var x = new Date(jsonDate);
-        x.setHours(x.getHours() - x.getTimezoneOffset() / 60);
-        return x;
     }
 
     private dateToString(dt: Date) {
