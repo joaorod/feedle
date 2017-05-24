@@ -4,7 +4,7 @@ class TsSeparator extends React.PureComponent<{}, {}> {
     render() {
         return (
             <div className="row ts-separator" >
-
+                
             </div>
         )
     }

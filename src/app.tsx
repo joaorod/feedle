@@ -8,7 +8,6 @@ import MemberForm from './memberForm';
 import TsSeparator from './tsSeparator';
 const apiBaseUrl = "/api/meeting";
 
-/*import MagicTs from './magicTs';*/
 
 interface IAppState {
     meeting: Model.Meeting,
@@ -55,7 +54,7 @@ class App extends React.Component<{}, IAppState> {
                 </div>
                 <TsSeparator />
 
-                {/*<MagicTs meeting={meeting} />*/}
+                
                 
             </div>
         );

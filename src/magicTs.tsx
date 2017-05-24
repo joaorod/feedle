@@ -7,7 +7,7 @@ class Winner {
 
 interface IMagicTsState {
     winners: Winner[],
-    maybeWinner: Winner
+    candidate: Winner
 }
 class MagicTs extends React.Component<{ meeting: Model.Meeting }, IMagicTsState>
 {
@@ -15,7 +15,7 @@ class MagicTs extends React.Component<{ meeting: Model.Meeting }, IMagicTsState>
         super();
         this.state = {
             winners: [],
-            maybeWinner: null
+            candidate: null
         };
     }
     public render() {
@@ -28,14 +28,14 @@ class MagicTs extends React.Component<{ meeting: Model.Meeting }, IMagicTsState>
                 </div>
             </div>
             );
-        var buttonContent = (!this.state.maybeWinner)
+        var buttonContent = (!this.state.candidate)
             ? (<span> <i className="fa fa-magic fa-lg"></i> do you feel lucky ?</span>)
-            : (<span> <i className="fa fa-circle-o-notch fa-spin  fa-fw"></i> {this.state.maybeWinner.name}</span>);
+            : (<span> <i className="fa fa-circle-o-notch fa-spin  fa-fw"></i> {this.state.candidate.name}</span>);
 
         return (
             <div className="panel">
             <div className="panel-body">
-                <button className="btn btn-lg btn-primary center-block" onClick={() => { this.DoMagic() }}>
+                <button className="btn btn-lg btn-primary center-block" onClick={() => { this.findWinner() }}>
                     {buttonContent}
                 </button>
 
@@ -46,49 +46,50 @@ class MagicTs extends React.Component<{ meeting: Model.Meeting }, IMagicTsState>
             </div>    
         );
     }
-    private DoMagic() {
-        this.FindWinner(0);
-    }
-    private FindWinner(i: number) {
+    
+    private findWinner(i: number=0) {
         setTimeout(() => {
             var allWinners = this.state.winners;
-            var maybeWinner = this.findWinner();
+            var maybeWinner = this.findCandidate();
             if (!!maybeWinner) {
-                if (i < 50) {
-                    this.FindWinner(i + 1);
+                if (i < 20) {
+                    this.findWinner(i + 1);
                 }
                 else {
                     allWinners.push(maybeWinner);
                     maybeWinner = null;
                 }
-                this.setState({ ...this.state, winners: allWinners, maybeWinner: maybeWinner })
+                this.setState({ ...this.state, winners: allWinners, candidate: maybeWinner })
             }
             else {
                 alert('No more candidates!');
             }
-        }, (i + 1)+50);
+        }, (i + 1)*10);
     }
 
-    private findWinner() {
-        var candidates = this.props.meeting.members.filter(p => p.confirmed === Model.Confirmation.Yes);
+    private findCandidate() {
+        var candidates = this.props.meeting.members
+            .filter(p => p.confirmed === Model.Confirmation.Yes);
         var winners = this.state.winners;
         if (winners.length >= candidates.length) {
             return null;
         }
 
+        var canMember: Model.Member;
         do {
-            var winnerIdx = Math.floor(Math.random() * candidates.length);
+            const winnerIdx = Math.floor(Math.random() * candidates.length);
 
-            var winMember = candidates[winnerIdx];
-            var existingWinner = winners.find(p => p.id === winMember.id);
+            canMember = candidates[winnerIdx];
+            let existingWinner = winners.find(p => p.id === canMember.id);
             var duplicated = (existingWinner != null);
         } while (duplicated)
 
-        var winner = new Winner(winMember.id, winMember.name);
+        var candidate = new Winner(canMember.id, canMember.name);
 
-        return winner;
+        return candidate;
     }
 }
+
 class MagicTsWinner extends React.Component<{ winner: Winner }, any>
 {
     public render() {
@@ -96,7 +97,7 @@ class MagicTsWinner extends React.Component<{ winner: Winner }, any>
         return (
             <div className="alert alert-info" role="alert">
                 <h4>
-                    <span> <i className="fa fa-2x fa-trophy text-primary" /> {winner.name}</span>
+                    <span> <img src="/_theme/img/tshirt.png" width={64} /> {winner.name}</span>
                 </h4>
             </div>
         );
