@@ -8,6 +8,7 @@ import MemberForm from './memberForm';
 import TsSeparator from './tsSeparator';
 const apiBaseUrl = "/api/meeting";
 
+import Game from './game/game';
 
 interface IAppState {
     meeting: Model.Meeting,
@@ -54,7 +55,7 @@ class App extends React.Component<{}, IAppState> {
                 </div>
                 <TsSeparator />
 
-                
+                <Game players={meeting.members} />
                 
             </div>
         );

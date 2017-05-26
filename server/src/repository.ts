@@ -26,9 +26,9 @@ export class Repository {
     }
 
     public async addMember(member: Model.Member) {
-        if (!this.isValidMember(member)) throw "invalid member";
-        var id = await Repository.saveMember(member);
-        return id;
+        if (!this.isValidMember(member))
+            throw "invalid member";
+        return await Repository.saveMember(member);
     }
 
     public async updateMember(member: Model.Member) {

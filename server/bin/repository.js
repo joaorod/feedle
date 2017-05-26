@@ -23,8 +23,7 @@ class Repository {
         return __awaiter(this, void 0, void 0, function* () {
             if (!this.isValidMember(member))
                 throw "invalid member";
-            var id = yield Repository.saveMember(member);
-            return id;
+            return yield Repository.saveMember(member);
         });
     }
     updateMember(member) {
