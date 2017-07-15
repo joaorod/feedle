@@ -15,7 +15,7 @@ class MemberForm extends React.Component<IMemberFormProps, { editingMember: Mode
         }) as any;
     }
 
-    protected componentWillReceiveProps(newProps: IMemberFormProps) {
+    public componentWillReceiveProps(newProps: IMemberFormProps) {
         this.setState({ editingMember: { ...newProps.member || this.memberDefault() } });
     }
 

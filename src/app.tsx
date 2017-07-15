@@ -61,7 +61,7 @@ class App extends React.Component<{}, IAppState> {
         );
     }
 
-    protected componentWillMount() {
+    public componentWillMount() {
         this.reloadAll();
     }
     private editMember(member: Model.Member = null) {
